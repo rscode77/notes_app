@@ -8,11 +8,19 @@ import 'package:notes_app/features/notes/presentation/widgets/notes_category_wid
 import '../../../../app_constants.dart';
 import '../../../../enums.dart';
 import '../../blocs/bloc/notes_bloc.dart';
+import '../../domain/data/entities/note.dart';
+import '../widgets/note_widget.dart';
+import '../widgets/notes_list_widget.dart';
 import '../widgets/user_profile_widget.dart';
 
-class NotesView extends StatelessWidget {
+class NotesView extends StatefulWidget {
   const NotesView({super.key});
 
+  @override
+  State<NotesView> createState() => _NotesViewState();
+}
+
+class _NotesViewState extends State<NotesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +28,11 @@ class NotesView extends StatelessWidget {
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.symmetric(
-            horizontal: 30.w,
-            vertical: 30.h,
+            horizontal: 35.w,
           ),
           child: Column(
             children: [
+              Gap(30.h),
               const UserProfileWidget(
                 image: '',
                 name: 'Jenny Breaks',
@@ -34,6 +42,7 @@ class NotesView extends StatelessWidget {
               Gap(30.h),
               BlocBuilder<NotesBloc, NotesState>(
                 builder: (context, state) {
+                  var notes = filterNotes(state.notes, state.selectedMenuTab);
                   return Column(
                     children: [
                       Row(
@@ -41,100 +50,33 @@ class NotesView extends StatelessWidget {
                           MenuItemWidget(
                             active: state.selectedMenuTab == MenuTab.notes,
                             title: 'Notes',
-                            onPressed: () => changeMenuTab(context, MenuTab.notes),
+                            onPressed: () => {
+                              changeMenuTab(context, MenuTab.notes),
+                            },
                           ),
                           Gap(30.w),
                           MenuItemWidget(
                             active: state.selectedMenuTab == MenuTab.important,
                             title: 'Important',
-                            onPressed: () => changeMenuTab(context, MenuTab.important),
+                            onPressed: () => {
+                              changeMenuTab(context, MenuTab.important),
+                            },
                           ),
                           Gap(30.w),
                           MenuItemWidget(
                             active: state.selectedMenuTab == MenuTab.performed,
                             title: 'Performed',
-                            onPressed: () => changeMenuTab(context, MenuTab.performed),
+                            onPressed: () => {
+                              changeMenuTab(context, MenuTab.performed),
+                            },
                           ),
                         ],
                       ),
-                      Gap(20.h),
-                      Container(
-                        padding: EdgeInsets.only(
-                          left: 25.w,
-                          right: 25.w,
-                          top: 15.h,
-                          bottom: 15.h,
-                        ),
-                        height: 160.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: gray,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Title',
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                Text(
-                                  'Time',
-                                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                                        color: grayText,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                              ],
-                            ),
-                            Gap(20.h),
-                            Text(
-                              'Description',
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                            Spacer(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Date',
-                                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                                        color: grayText,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(color: blue, borderRadius: BorderRadius.circular(8)),
-                                  height: 30.h,
-                                  width: 30.w,
-                                  child: const Icon(
-                                    Icons.done,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
+                      Gap(10.h),
+                      NotesListWidget(notes: notes),
                     ],
                   );
                 },
-              ),
-              Spacer(),
-              Container(
-                height: 65.h,
-                width: 65.w,
-                child: FloatingActionButton(
-                  onPressed: () {},
-                  backgroundColor: blue,
-                  child: Icon(
-                    Icons.add,
-                  ),
-                ),
               ),
             ],
           ),
@@ -144,6 +86,24 @@ class NotesView extends StatelessWidget {
   }
 
   void changeMenuTab(BuildContext context, MenuTab menuTab) {
-    context.read<NotesBloc>().add(ChangeMenuTab(menuTab: menuTab));
+    context.read<NotesBloc>().add(ChangeMenuTabEvent(menuTab: menuTab));
+  }
+
+  List<Note> filterNotes(List<Note> stateNotes, MenuTab menuTab) {
+    String filter = '';
+    switch (menuTab) {
+      case MenuTab.notes:
+        filter = 'standard';
+        break;
+      case MenuTab.important:
+        filter = 'important';
+        break;
+      case MenuTab.performed:
+        filter = 'performed';
+        break;
+      default:
+        filter = 'standard';
+    }
+    return stateNotes.where((element) => element.noteStatus == filter).toList();
   }
 }

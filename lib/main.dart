@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(392.72727272727275, 759.2727272727273),
+      designSize: const Size(392.72727272727275, 781.0909090909091),
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
               create: (BuildContext context) => UserBloc(),
             ),
             BlocProvider(
-              create: (BuildContext context) => NotesBloc(),
+              create: (BuildContext context) => NotesBloc()..add(InitDatabaseEvent()),
             ),
           ],
           child: MaterialApp(
