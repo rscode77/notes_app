@@ -37,7 +37,7 @@ class NotesCategoryContainerWidget extends StatelessWidget {
           end: Alignment.bottomCenter,
         ),
       ),
-      height: 200.h,
+      height: 180.h,
       width: MediaQuery.of(context).size.width / 2.5,
       child: Container(
         margin: EdgeInsets.symmetric(

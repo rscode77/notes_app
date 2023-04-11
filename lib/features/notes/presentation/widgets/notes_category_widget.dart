@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/features/notes/presentation/widgets/notes_category_container_widget.dart';
 
-import '../../../../app_constants.dart';
-
 class NotesCategoryWidget extends StatelessWidget {
   const NotesCategoryWidget({super.key});
 
@@ -19,7 +17,7 @@ class NotesCategoryWidget extends StatelessWidget {
         NotesCategoryContainerWidget(
           notesTitle: 'Important',
           active: false,
-          notesQuantity: 125,
+          notesQuantity: 25,
         ),
       ],
     );

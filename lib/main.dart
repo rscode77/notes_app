@@ -48,6 +48,16 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                   color: black,
                 ),
+                labelLarge: GoogleFonts.lato(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: black,
+                ),
+                labelMedium: GoogleFonts.lato(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: black,
+                ),
               ),
             ),
             initialRoute: route.notesView,

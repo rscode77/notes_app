@@ -21,7 +21,7 @@ class NotesView extends StatelessWidget {
         child: Container(
           margin: EdgeInsets.symmetric(
             horizontal: 30.w,
-            vertical: 40.h,
+            vertical: 30.h,
           ),
           child: Column(
             children: [
@@ -29,34 +29,113 @@ class NotesView extends StatelessWidget {
                 image: '',
                 name: 'Jenny Breaks',
               ),
-              Gap(40.h),
+              Gap(30.h),
               const NotesCategoryWidget(),
-              Gap(40.h),
+              Gap(30.h),
               BlocBuilder<NotesBloc, NotesState>(
                 builder: (context, state) {
-                  return Row(
+                  return Column(
                     children: [
-                      MenuItemWidget(
-                        active: state.selectedMenuTab == MenuTab.notes,
-                        title: 'Notes',
-                        onPressed: () => changeMenuTab(context, MenuTab.notes),
+                      Row(
+                        children: [
+                          MenuItemWidget(
+                            active: state.selectedMenuTab == MenuTab.notes,
+                            title: 'Notes',
+                            onPressed: () => changeMenuTab(context, MenuTab.notes),
+                          ),
+                          Gap(30.w),
+                          MenuItemWidget(
+                            active: state.selectedMenuTab == MenuTab.important,
+                            title: 'Important',
+                            onPressed: () => changeMenuTab(context, MenuTab.important),
+                          ),
+                          Gap(30.w),
+                          MenuItemWidget(
+                            active: state.selectedMenuTab == MenuTab.performed,
+                            title: 'Performed',
+                            onPressed: () => changeMenuTab(context, MenuTab.performed),
+                          ),
+                        ],
                       ),
-                      Gap(30.w),
-                      MenuItemWidget(
-                        active: state.selectedMenuTab == MenuTab.important,
-                        title: 'Important',
-                        onPressed: () => changeMenuTab(context, MenuTab.important),
-                      ),
-                      Gap(30.w),
-                      MenuItemWidget(
-                        active: state.selectedMenuTab == MenuTab.performed,
-                        title: 'Performed',
-                        onPressed: () => changeMenuTab(context, MenuTab.performed),
-                      ),
+                      Gap(20.h),
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: 25.w,
+                          right: 25.w,
+                          top: 15.h,
+                          bottom: 15.h,
+                        ),
+                        height: 160.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: gray,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Title',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                Text(
+                                  'Time',
+                                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                        color: grayText,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                              ],
+                            ),
+                            Gap(20.h),
+                            Text(
+                              'Description',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                            Spacer(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Date',
+                                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                        color: grayText,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(color: blue, borderRadius: BorderRadius.circular(8)),
+                                  height: 30.h,
+                                  width: 30.w,
+                                  child: const Icon(
+                                    Icons.done,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   );
                 },
-              )
+              ),
+              Spacer(),
+              Container(
+                height: 65.h,
+                width: 65.w,
+                child: FloatingActionButton(
+                  onPressed: () {},
+                  backgroundColor: blue,
+                  child: Icon(
+                    Icons.add,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
