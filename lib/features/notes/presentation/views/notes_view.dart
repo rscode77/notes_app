@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:notes_app/features/notes/presentation/widgets/menu_item.dart';
-import 'package:notes_app/features/notes/presentation/widgets/notes_category_widget.dart';
 
 import '../../../../app_constants.dart';
 import '../../../../enums.dart';
 import '../../blocs/bloc/notes_bloc.dart';
 import '../../domain/data/entities/note.dart';
-import '../widgets/note_widget.dart';
+
+import '../widgets/notes_container_widget.dart';
 import '../widgets/notes_list_widget.dart';
 import '../widgets/user_profile_widget.dart';
 
@@ -38,13 +38,27 @@ class _NotesViewState extends State<NotesView> {
                 name: 'Jenny Breaks',
               ),
               Gap(30.h),
-              const NotesCategoryWidget(),
-              Gap(30.h),
               BlocBuilder<NotesBloc, NotesState>(
                 builder: (context, state) {
                   var notes = filterNotes(state.notes, state.selectedMenuTab);
                   return Column(
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          NotesContainerWidget(
+                            notesTitle: 'Notes',
+                            active: true,
+                            notesQuantity: state.notes.where((element) => element.noteStatus == 'standard').toList().length,
+                          ),
+                          NotesContainerWidget(
+                            notesTitle: 'Important',
+                            active: false,
+                            notesQuantity: state.notes.where((element) => element.noteStatus == 'important').toList().length,
+                          ),
+                        ],
+                      ),
+                      Gap(30.h),
                       Row(
                         children: [
                           MenuItemWidget(

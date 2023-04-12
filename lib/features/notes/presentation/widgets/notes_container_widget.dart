@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app_constants.dart';
 
-class NotesCategoryContainerWidget extends StatelessWidget {
-  const NotesCategoryContainerWidget({
+class NotesContainerWidget extends StatelessWidget {
+  const NotesContainerWidget({
     Key? key,
     required this.notesTitle,
     required this.active,
