@@ -37,7 +37,6 @@ class NoteRepositoryImpl extends NoteRepository {
   @override
   Future<void> insertNote(Database database, Note note) async {
     final db = database;
-
     await db.insert(
       'notes',
       note.toMap(),

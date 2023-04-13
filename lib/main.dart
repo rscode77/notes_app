@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(392.72727272727275, 781.0909090909091),
+      designSize: const Size(392.72727272727275, 759.2727272727273),
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
@@ -31,8 +31,17 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             title: 'NotesApp',
             theme: ThemeData(
-              primarySwatch: Colors.blue,
               textTheme: TextTheme(
+                titleLarge: GoogleFonts.lato(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w800,
+                  color: black,
+                ),
+                titleSmall: GoogleFonts.lato(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w400,
+                  color: black,
+                ),
                 headlineLarge: GoogleFonts.lato(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
@@ -56,6 +65,11 @@ class MyApp extends StatelessWidget {
                 labelMedium: GoogleFonts.lato(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
+                  color: black,
+                ),
+                labelSmall: GoogleFonts.roboto(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
                   color: black,
                 ),
               ),

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../app_constants.dart';
-import '../../../../enums.dart';
 
 class NoteWidget extends StatelessWidget {
   final String title;
