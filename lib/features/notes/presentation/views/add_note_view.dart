@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import 'package:notes_app/app_constants.dart';
+import 'package:notes_app/features/notes/presentation/widgets/note_importance.dart';
 
+import '../widgets/custom_button.dart';
 import '../widgets/note_description.dart';
 import '../widgets/note_title.dart';
 
@@ -24,7 +26,6 @@ class AddNoteView extends StatelessWidget {
           ),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Add Note',
@@ -49,6 +50,13 @@ class AddNoteView extends StatelessWidget {
                 NoteDescription(
                   descriptionController: descriptionController,
                 ),
+                Gap(20.h),
+                //Importance
+                NoteImportance(
+                  importanceController: descriptionController,
+                ),
+
+                const CustomButton()
               ],
             ),
           ),

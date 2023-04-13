@@ -4,17 +4,26 @@ import 'package:gap/gap.dart';
 
 import '../../../../app_constants.dart';
 
-class NoteTitle extends StatelessWidget {
-  final TextEditingController titleController;
+class NoteImportance extends StatefulWidget {
+  final TextEditingController importanceController;
 
-  const NoteTitle({
+  const NoteImportance({
     Key? key,
-    required this.titleController,
+    required this.importanceController,
   }) : super(key: key);
+
+  @override
+  State<NoteImportance> createState() => _NoteImportanceState();
+}
+
+class _NoteImportanceState extends State<NoteImportance> {
+  String importance = 'Normal';
+  final List<String> importanceValues = ['Normal', 'Important'];
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -27,7 +36,7 @@ class NoteTitle extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  '1',
+                  '3',
                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: Colors.white,
                       ),
@@ -36,9 +45,9 @@ class NoteTitle extends StatelessWidget {
             ),
             Gap(15.w),
             Text(
-              'Enter title',
+              'Set note importance',
               style: Theme.of(context).textTheme.labelLarge,
-            )
+            ),
           ],
         ),
         Gap(10.h),
@@ -49,16 +58,28 @@ class NoteTitle extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             color: gray,
           ),
-          height: 50.h,
           width: double.infinity,
-          child: TextField(
-            controller: titleController,
-            decoration: InputDecoration(
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              hintText: 'throw out rubbish...',
-              hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: grayText),
+          height: 50.h,
+          child: DropdownButton<String>(
+            isExpanded: true,
+            value: importance,
+            icon: const Icon(
+              Icons.arrow_drop_down_rounded,
+              color: black,
             ),
+            style: Theme.of(context).textTheme.labelLarge,
+            underline: Container(),
+            onChanged: (String? value) {
+              setState(() {
+                importance = value!;
+              });
+            },
+            items: importanceValues.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
           ),
         ),
       ],

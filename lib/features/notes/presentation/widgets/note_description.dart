@@ -44,7 +44,7 @@ class NoteDescription extends StatelessWidget {
         Gap(10.h),
         Container(
           height: 150.h,
-          margin: EdgeInsets.only(left: 10.w),
+          margin: EdgeInsets.only(left: 10.w, right: 10.w),
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
