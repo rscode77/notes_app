@@ -1,12 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app_constants.dart';
 
 class CustomButton extends StatelessWidget {
+  final String title;
+  final Color color;
+  final Function()? onPressed;
   const CustomButton({
-    super.key,
-  });
+    Key? key,
+    required this.title,
+    required this.color,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +22,12 @@ class CustomButton extends StatelessWidget {
       height: 50.h,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(18)),
-          backgroundColor: blue,
+          shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          backgroundColor: color,
         ),
-        onPressed: () => Navigator.pop(context),
+        onPressed: onPressed,
         child: Text(
-          'Confirm new note',
+          title,
           style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
         ),
       ),

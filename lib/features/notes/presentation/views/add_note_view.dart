@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 import 'package:notes_app/app_constants.dart';
+import 'package:notes_app/features/notes/domain/data/entities/note.dart';
 import 'package:notes_app/features/notes/presentation/widgets/note_importance.dart';
 
+import '../../blocs/bloc/notes_bloc.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/note_description.dart';
 import '../widgets/note_title.dart';
@@ -16,16 +20,19 @@ class AddNoteView extends StatelessWidget {
   Widget build(BuildContext context) {
     final titleController = TextEditingController();
     final descriptionController = TextEditingController();
+    final importanceController = TextEditingController();
+
     return Scaffold(
       backgroundColor: background,
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.symmetric(
-            horizontal: 40.w,
-            vertical: 40.h,
+            horizontal: 30.w,
+            vertical: 30.h,
           ),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Add Note',
@@ -35,12 +42,12 @@ class AddNoteView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Important',
+                      DateFormat('d MMMM').format(DateTime.now()),
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
                 ),
-                Gap(40.h),
+                Gap(20.h),
                 //Title
                 NoteTitle(
                   titleController: titleController,
@@ -53,10 +60,33 @@ class AddNoteView extends StatelessWidget {
                 Gap(20.h),
                 //Importance
                 NoteImportance(
-                  importanceController: descriptionController,
+                  importanceController: importanceController,
                 ),
-
-                const CustomButton()
+                Gap(30.h),
+                CustomButton(
+                  color: blue,
+                  onPressed: () => {
+                    context.read<NotesBloc>().add(
+                          InsertNoteEvent(
+                            note: Note(
+                                date: DateFormat('d MMMM').format(DateTime.now()),
+                                description: descriptionController.text,
+                                id: null,
+                                noteStatus: importanceController.text.toLowerCase(),
+                                time: DateFormat.Hm().format(DateTime.now()),
+                                title: titleController.text),
+                          ),
+                        ),
+                    Navigator.pop(context),
+                  },
+                  title: 'Confirm new note',
+                ),
+                Gap(10.h),
+                CustomButton(
+                  color: black,
+                  onPressed: () => Navigator.pop(context),
+                  title: 'Back',
+                )
               ],
             ),
           ),

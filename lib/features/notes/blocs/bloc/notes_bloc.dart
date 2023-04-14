@@ -15,7 +15,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       emit(state.copyWith(selectedMenuTab: event.menuTab));
     });
     on<GetNotesEvent>((event, emit) async {
-      var notes = await NoteRepositoryImpl().getNotes(state.database!);
+      var notes = await NoteRepositoryImpl().getNotes(database: state.database!);
       if (notes.isEmpty) {
         return;
       }
@@ -27,18 +27,9 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       add(GetNotesEvent());
     });
     on<InsertNoteEvent>((event, emit) async {
-      await NoteRepositoryImpl().insertNote(
-        state.database!,
-        const Note(
-          date: '2023-04-13',
-          description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', id: null, noteStatus: 'standard', time: '12:15', title: 'Lorem ipsum",
-          id: null,
-          noteStatus: 'standard',
-          time: '12:15',
-          title: 'Lorem ipsum',
-        ),
-      );
+      await NoteRepositoryImpl().insertNote(database: state.database!, note: event.note);
+      add(GetNotesEvent());
+      print(event.note.noteStatus);
     });
   }
 }

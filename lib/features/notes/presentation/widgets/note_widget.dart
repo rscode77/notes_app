@@ -25,60 +25,83 @@ class NoteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 150.h,
-      padding: EdgeInsets.only(
-        left: 25.w,
-        right: 25.w,
-        top: 15.h,
-        bottom: 15.h,
-      ),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: gray,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
+      alignment: AlignmentDirectional.bottomStart,
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 30.w),
+          height: 160.h,
+          padding: EdgeInsets.only(
+            left: 25.w,
+            right: 25.w,
+            top: 15.h,
+            bottom: 15.h,
+          ),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: gray,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.labelLarge,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  Text(
+                    time,
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                          color: grayText,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                ],
               ),
+              Gap(20.h),
               Text(
-                time,
-                style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                      color: grayText,
-                      fontWeight: FontWeight.w600,
-                    ),
+                description,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    date,
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                          color: grayText,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                ],
               ),
             ],
           ),
-          Gap(20.h),
-          Text(
-            description,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelMedium,
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: 15.w,
+            vertical: 10.h,
           ),
-          const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                date,
-                style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                      color: grayText,
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-            ],
+          decoration: BoxDecoration(
+            color: blue,
+            borderRadius: BorderRadius.circular(12),
           ),
-        ],
-      ),
+          height: 38.h,
+          width: 38.w,
+          child: const Icon(
+            Icons.open_in_full_rounded,
+            color: Colors.white,
+            size: 21,
+          ),
+        ),
+      ],
     );
   }
 }

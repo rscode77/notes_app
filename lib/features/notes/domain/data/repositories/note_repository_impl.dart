@@ -18,7 +18,7 @@ class NoteRepositoryImpl extends NoteRepository {
   }
 
   @override
-  Future<List<Note>> getNotes(Database database) async {
+  Future<List<Note>> getNotes({required Database database}) async {
     final db = database;
     final List<Map<String, dynamic>> maps = await db.query('notes');
 
@@ -35,7 +35,7 @@ class NoteRepositoryImpl extends NoteRepository {
   }
 
   @override
-  Future<void> insertNote(Database database, Note note) async {
+  Future<void> insertNote({required Database database, required Note note}) async {
     final db = database;
     await db.insert(
       'notes',

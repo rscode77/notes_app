@@ -17,8 +17,13 @@ class NoteImportance extends StatefulWidget {
 }
 
 class _NoteImportanceState extends State<NoteImportance> {
-  String importance = 'Normal';
-  final List<String> importanceValues = ['Normal', 'Important'];
+  final List<String> importanceValues = ['Standard', 'Important'];
+
+  @override
+  void initState() {
+    widget.importanceController.text = 'Standard';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +67,7 @@ class _NoteImportanceState extends State<NoteImportance> {
           height: 50.h,
           child: DropdownButton<String>(
             isExpanded: true,
-            value: importance,
+            value: widget.importanceController.text,
             icon: const Icon(
               Icons.arrow_drop_down_rounded,
               color: black,
@@ -71,7 +76,7 @@ class _NoteImportanceState extends State<NoteImportance> {
             underline: Container(),
             onChanged: (String? value) {
               setState(() {
-                importance = value!;
+                widget.importanceController.text = value!;
               });
             },
             items: importanceValues.map<DropdownMenuItem<String>>((String value) {
