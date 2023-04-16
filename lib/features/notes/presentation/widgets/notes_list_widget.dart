@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:notes_app/app_constants.dart';
+import 'package:notes_app/features/notes/presentation/views/add_note_view.dart';
 
 import 'package:notes_app/features/notes/presentation/widgets/circle_button.dart';
 import 'package:notes_app/routes.dart';
@@ -45,21 +46,10 @@ class NotesListWidget extends StatelessWidget {
             ),
             child: Align(
               alignment: Alignment.bottomRight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CircleButton(
-                    icon: Icons.list_rounded,
-                    onPressed: () => Navigator.pushNamed(context, addNoteView),
-                    color: black,
-                  ),
-                  Gap(8.h),
-                  CircleButton(
-                    icon: Icons.add,
-                    onPressed: () => Navigator.pushNamed(context, addNoteView),
-                    color: blue,
-                  ),
-                ],
+              child: CircleButton(
+                icon: Icons.add,
+                onPressed: () => Navigator.pushNamed(context, addNoteView),
+                color: blue,
               ),
             ),
           ),

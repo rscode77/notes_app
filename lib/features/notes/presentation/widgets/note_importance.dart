@@ -18,6 +18,7 @@ class NoteImportance extends StatefulWidget {
 
 class _NoteImportanceState extends State<NoteImportance> {
   final List<String> importanceValues = ['Standard', 'Important'];
+  
 
   @override
   void initState() {

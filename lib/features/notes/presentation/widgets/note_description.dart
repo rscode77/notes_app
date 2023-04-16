@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../app_constants.dart';
 
-class NoteDescription extends StatelessWidget {
+class NoteDescription extends StatefulWidget {
   final TextEditingController descriptionController;
 
   const NoteDescription({
@@ -12,6 +12,11 @@ class NoteDescription extends StatelessWidget {
     required this.descriptionController,
   }) : super(key: key);
 
+  @override
+  State<NoteDescription> createState() => _NoteDescriptionState();
+}
+
+class _NoteDescriptionState extends State<NoteDescription> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +28,7 @@ class NoteDescription extends StatelessWidget {
               width: 25.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: blue,
+                color: widget.descriptionController.text.isEmpty ? Colors.red : blue,
               ),
               child: Center(
                 child: Text(
@@ -52,9 +57,10 @@ class NoteDescription extends StatelessWidget {
           ),
           width: double.infinity,
           child: TextField(
+            onChanged: (value) => setState(() {}),
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            controller: descriptionController,
+            controller: widget.descriptionController,
             decoration: InputDecoration(
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,

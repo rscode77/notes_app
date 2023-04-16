@@ -30,7 +30,7 @@ class NoteWidget extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.symmetric(horizontal: 30.w),
-          height: 160.h,
+          height: 145.h,
           padding: EdgeInsets.only(
             left: 25.w,
             right: 25.w,
@@ -61,7 +61,7 @@ class NoteWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              Gap(20.h),
+              Gap(15.h),
               Text(
                 description,
                 maxLines: 3,

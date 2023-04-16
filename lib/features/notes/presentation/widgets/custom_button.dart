@@ -1,8 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../app_constants.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
@@ -22,7 +19,7 @@ class CustomButton extends StatelessWidget {
       height: 50.h,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
           backgroundColor: color,
         ),
         onPressed: onPressed,
