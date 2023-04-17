@@ -55,3 +55,27 @@ class EditNoteEvent extends NotesEvent {
 class InitDatabaseEvent extends NotesEvent {}
 
 class GetNotesEvent extends NotesEvent {}
+
+class PerformNoteEvent extends NotesEvent {
+  final int noteId;
+
+  const PerformNoteEvent({
+    required this.noteId,
+  });
+
+  @override
+  List<Object> get props => [noteId];
+}
+
+class ChangeImportanceEvent extends NotesEvent {
+  final int noteId;
+  final String importance;
+
+  const ChangeImportanceEvent({
+    required this.noteId,
+    required this.importance,
+  });
+
+  @override
+  List<Object> get props => [noteId];
+}

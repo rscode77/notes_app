@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButtonWidget extends StatelessWidget {
   final String title;
   final Color color;
   final Function()? onPressed;
-  const CustomButton({
+  const CustomButtonWidget({
     Key? key,
     required this.title,
     required this.color,

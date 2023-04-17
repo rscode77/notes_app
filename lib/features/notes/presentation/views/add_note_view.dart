@@ -6,12 +6,13 @@ import 'package:intl/intl.dart';
 
 import 'package:notes_app/app_constants.dart';
 import 'package:notes_app/features/notes/domain/data/entities/note.dart';
-import 'package:notes_app/features/notes/presentation/widgets/note_importance.dart';
+import 'package:notes_app/features/notes/presentation/widgets/note_importance_widget.dart';
 
 import '../../blocs/bloc/notes_bloc.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/note_description.dart';
-import '../widgets/note_title.dart';
+import '../widgets/circle_button_widget.dart';
+import '../widgets/custom_button_widget.dart';
+import '../widgets/note_description_widget.dart';
+import '../widgets/note_title_widget.dart';
 
 class AddNoteView extends StatefulWidget {
   const AddNoteView({super.key});
@@ -28,6 +29,7 @@ class _AddNoteViewState extends State<AddNoteView> {
     final importanceController = TextEditingController();
 
     return Scaffold(
+      backgroundColor: background,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
@@ -53,21 +55,21 @@ class _AddNoteViewState extends State<AddNoteView> {
               ),
               Gap(20.h),
               //Title
-              NoteTitle(
+              NoteTitleWidget(
                 titleController: titleController,
               ),
               Gap(20.h),
               //Description
-              NoteDescription(
+              NoteDescriptionWidget(
                 descriptionController: descriptionController,
               ),
               Gap(20.h),
               //Importance
-              NoteImportance(
+              NoteImportanceWidget(
                 importanceController: importanceController,
               ),
-              const Spacer(),
-              CustomButton(
+              Gap(30.h),
+              CustomButtonWidget(
                 color: blue,
                 onPressed: () => {
                   if (titleController.text.isNotEmpty && descriptionController.text.isNotEmpty)
@@ -80,12 +82,15 @@ class _AddNoteViewState extends State<AddNoteView> {
                 },
                 title: 'Confirm new note',
               ),
-              Gap(10.h),
-              CustomButton(
-                color: black,
-                onPressed: () => Navigator.pop(context),
-                title: 'Back',
-              )
+              const Spacer(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CircleButtonWidget(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icons.close,
+                  color: black,
+                ),
+              ),
             ],
           ),
         ),

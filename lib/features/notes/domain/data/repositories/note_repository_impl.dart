@@ -6,15 +6,18 @@ import '../../repositories/note_repository.dart';
 
 class NoteRepositoryImpl extends NoteRepository {
   @override
-  Future<void> deleteNote() {
-    // TODO: implement DeleteNote
-    throw UnimplementedError();
+  Future<void> deleteNote({required Database database, required int noteId}) {
+    return database.delete('notes', where: "id = $noteId");
   }
 
   @override
-  Future<void> editNote() {
-    // TODO: implement EditNote
-    throw UnimplementedError();
+  Future<void> performNote({required Database database, required int noteId}) {
+    return database.rawUpdate('UPDATE notes SET noteStatus = "performed" WHERE id = $noteId');
+  }
+
+  @override
+  Future<void> changeImportance({required Database database, required int noteId, required String importance}) {
+    return database.rawUpdate('UPDATE notes SET noteStatus = "$importance" WHERE id = $noteId');
   }
 
   @override

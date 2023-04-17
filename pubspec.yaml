@@ -43,6 +43,7 @@ dependencies:
   vibration: ^1.7.6
   intl: ^0.18.0
   sqflite: ^2.2.6
+  flutter_animate: ^4.1.1+1
 
 dev_dependencies:
   flutter_test:

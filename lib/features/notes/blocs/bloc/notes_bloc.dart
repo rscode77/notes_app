@@ -29,7 +29,18 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     on<InsertNoteEvent>((event, emit) async {
       await NoteRepositoryImpl().insertNote(database: state.database!, note: event.note);
       add(GetNotesEvent());
-      print(event.note.noteStatus);
+    });
+    on<DeleteNoteEvent>((event, emit) async {
+      await NoteRepositoryImpl().deleteNote(database: state.database!, noteId: event.noteId);
+      add(GetNotesEvent());
+    });
+    on<PerformNoteEvent>((event, emit) async {
+      await NoteRepositoryImpl().performNote(database: state.database!, noteId: event.noteId);
+      add(GetNotesEvent());
+    });
+    on<ChangeImportanceEvent>((event, emit) async {
+      await NoteRepositoryImpl().changeImportance(database: state.database!, noteId: event.noteId, importance: event.importance);
+      add(GetNotesEvent());
     });
   }
 }

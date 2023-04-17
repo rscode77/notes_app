@@ -12,3 +12,5 @@ const Color blue = Color.fromARGB(255, 58, 110, 252);
 const Color lightBlue = Color.fromARGB(255, 68, 130, 255);
 
 const Color grayText = Color.fromARGB(255, 177, 180, 193);
+
+const Color yellow = Color.fromARGB(255, 255, 186, 0);

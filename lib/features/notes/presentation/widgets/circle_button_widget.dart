@@ -1,15 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../app_constants.dart';
-
-class CircleButton extends StatelessWidget {
+class CircleButtonWidget extends StatelessWidget {
   final Function()? onPressed;
   final IconData icon;
   final Color color;
 
-  const CircleButton({
+  const CircleButtonWidget({
     Key? key,
     required this.onPressed,
     required this.icon,

@@ -4,19 +4,19 @@ import 'package:gap/gap.dart';
 
 import '../../../../app_constants.dart';
 
-class NoteDescription extends StatefulWidget {
-  final TextEditingController descriptionController;
+class NoteTitleWidget extends StatefulWidget {
+  final TextEditingController titleController;
 
-  const NoteDescription({
+  const NoteTitleWidget({
     Key? key,
-    required this.descriptionController,
+    required this.titleController,
   }) : super(key: key);
 
   @override
-  State<NoteDescription> createState() => _NoteDescriptionState();
+  State<NoteTitleWidget> createState() => _NoteTitleWidgetState();
 }
 
-class _NoteDescriptionState extends State<NoteDescription> {
+class _NoteTitleWidgetState extends State<NoteTitleWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,11 +28,11 @@ class _NoteDescriptionState extends State<NoteDescription> {
               width: 25.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: widget.descriptionController.text.isEmpty ? Colors.red : blue,
+                color: widget.titleController.text.isEmpty ? Colors.red : blue,
               ),
               child: Center(
                 child: Text(
-                  '2',
+                  '1',
                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: Colors.white,
                       ),
@@ -41,30 +41,28 @@ class _NoteDescriptionState extends State<NoteDescription> {
             ),
             Gap(15.w),
             Text(
-              'Enter description',
+              'Enter title',
               style: Theme.of(context).textTheme.labelLarge,
             )
           ],
         ),
         Gap(10.h),
         Container(
-          height: 150.h,
           margin: EdgeInsets.only(left: 10.w, right: 10.w),
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: gray,
           ),
+          height: 50.h,
           width: double.infinity,
           child: TextField(
             onChanged: (value) => setState(() {}),
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            controller: widget.descriptionController,
+            controller: widget.titleController,
             decoration: InputDecoration(
-              enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
-              hintText: 'enter a description for the note...',
+              enabledBorder: InputBorder.none,
+              hintText: 'throw out rubbish...',
               hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: grayText),
             ),
           ),

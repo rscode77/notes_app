@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:notes_app/features/notes/presentation/widgets/menu_item.dart';
+import 'package:notes_app/features/notes/presentation/widgets/information_widget.dart';
+import 'package:notes_app/features/notes/presentation/widgets/menu_item_widget.dart';
 
 import '../../../../app_constants.dart';
 import '../../../../enums.dart';
@@ -22,6 +25,7 @@ class NotesView extends StatefulWidget {
 }
 
 class _NotesViewState extends State<NotesView> {
+  bool resizeNoteList = true;
   @override
   Widget build(BuildContext context) {
     // print(MediaQuery.of(context).size.height);
@@ -37,14 +41,29 @@ class _NotesViewState extends State<NotesView> {
               builder: (context, state) {
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 30.w),
-                  child: const UserProfileWidget(
-                    image: '',
-                    name: 'Jenny Breaks',
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const UserProfileWidget(
+                        image: '',
+                        name: 'Jenny Breaks',
+                      ),
+                      InkWell(
+                        highlightColor: Colors.transparent,
+                        splashColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        onTap: () => showDialog(
+                          context: context,
+                          builder: (context) => const InformationWidget(),
+                        ),
+                        child: const Icon(Icons.info_outline_rounded, size: 25),
+                      ).animate(onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5))).shake()
+                    ],
                   ),
                 );
               },
             ),
-            Gap(30.h),
+            Gap(resizeNoteList ? 30.h : 0.h),
             BlocBuilder<NotesBloc, NotesState>(
               builder: (context, notesState) {
                 var notes = filterNotes(notesState.notes, notesState.selectedMenuTab);
@@ -55,24 +74,27 @@ class _NotesViewState extends State<NotesView> {
                         margin: EdgeInsets.symmetric(horizontal: 30.w),
                         child: Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                NotesContainerWidget(
-                                  notesTitle: 'Notes',
-                                  active: notesState.selectedMenuTab == MenuTab.notes,
-                                  notesQuantity: notesState.notes.where((element) => element.noteStatus == 'standard').toList().length,
-                                  onPressed: () => changeMenuTab(context, MenuTab.notes),
-                                ),
-                                Gap(10.w),
-                                NotesContainerWidget(
-                                  notesTitle: 'Important',
-                                  active: notesState.selectedMenuTab == MenuTab.important,
-                                  notesQuantity: notesState.notes.where((element) => element.noteStatus == 'important').toList().length,
-                                  onPressed: () => changeMenuTab(context, MenuTab.important),
-                                ),
-                                Gap(10.w),
-                              ],
+                            Visibility(
+                              visible: resizeNoteList,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  NotesContainerWidget(
+                                    notesTitle: 'Notes',
+                                    active: notesState.selectedMenuTab == MenuTab.notes,
+                                    notesQuantity: notesState.notes.where((element) => element.noteStatus == 'standard').toList().length,
+                                    onPressed: () => changeMenuTab(context, MenuTab.notes),
+                                  ),
+                                  Gap(10.w),
+                                  NotesContainerWidget(
+                                    notesTitle: 'Important',
+                                    active: notesState.selectedMenuTab == MenuTab.important,
+                                    notesQuantity: notesState.notes.where((element) => element.noteStatus == 'important').toList().length,
+                                    onPressed: () => changeMenuTab(context, MenuTab.important),
+                                  ),
+                                  Gap(10.w),
+                                ],
+                              ),
                             ),
                             Gap(30.h),
                             Row(
@@ -94,6 +116,28 @@ class _NotesViewState extends State<NotesView> {
                                   title: 'Performed',
                                   onPressed: () => changeMenuTab(context, MenuTab.performed),
                                 ),
+                                const Spacer(),
+                                InkWell(
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => setState(() {
+                                    resizeNoteList = !resizeNoteList;
+                                  }),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: blue,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    height: 35.h,
+                                    width: 35.w,
+                                    child: Icon(
+                                      resizeNoteList ? Icons.arrow_circle_up_rounded : Icons.arrow_circle_down_rounded,
+                                      color: Colors.white,
+                                      size: 25,
+                                    ),
+                                  ),
+                                ).animate(onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5))).shake(),
                               ],
                             ),
                           ],

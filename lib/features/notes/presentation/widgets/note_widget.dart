@@ -1,9 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:notes_app/features/notes/presentation/views/resized_note_view.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../app_constants.dart';
+import '../../domain/data/entities/note.dart';
 
 class NoteWidget extends StatelessWidget {
   final String title;
@@ -30,7 +32,6 @@ class NoteWidget extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.symmetric(horizontal: 30.w),
-          height: 145.h,
           padding: EdgeInsets.only(
             left: 25.w,
             right: 25.w,
@@ -43,32 +44,43 @@ class NoteWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.labelLarge,
+                  Flexible(
+                    flex: 4,
+                    child: Text(
+                      title,
+                      style: noteStatus == 'performed'
+                          ? Theme.of(context).textTheme.labelLarge!.copyWith(decoration: TextDecoration.lineThrough, color: grayText)
+                          : Theme.of(context).textTheme.labelLarge,
+                    ),
                   ),
-                  Text(
-                    time,
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                          color: grayText,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  Flexible(
+                    flex: 1,
+                    child: Text(
+                      time,
+                      style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                            color: grayText,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
                   ),
                 ],
               ),
               Gap(15.h),
               Text(
                 description,
-                maxLines: 3,
+                maxLines: 7,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: noteStatus == 'performed'
+                    ? Theme.of(context).textTheme.labelMedium!.copyWith(decoration: TextDecoration.lineThrough, color: grayText)
+                    : Theme.of(context).textTheme.labelMedium,
               ),
-              const Spacer(),
+              Gap(15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -93,14 +105,32 @@ class NoteWidget extends StatelessWidget {
             color: blue,
             borderRadius: BorderRadius.circular(12),
           ),
-          height: 38.h,
-          width: 38.w,
-          child: const Icon(
-            Icons.open_in_full_rounded,
-            color: Colors.white,
-            size: 21,
+          height: 35.h,
+          width: 35.w,
+          child: InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) => ResizedNoteView(
+                note: Note(
+                  date: date,
+                  description: description,
+                  id: id,
+                  noteStatus: noteStatus,
+                  time: time,
+                  title: title,
+                ),
+              ),
+            ),
+            child: const Icon(
+              Icons.arrow_circle_right_outlined,
+              color: Colors.white,
+              size: 25,
+            ),
           ),
-        ),
+        ).animate(onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5))).shake(),
       ],
     );
   }

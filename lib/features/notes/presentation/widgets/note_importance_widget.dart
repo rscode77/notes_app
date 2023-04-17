@@ -4,21 +4,20 @@ import 'package:gap/gap.dart';
 
 import '../../../../app_constants.dart';
 
-class NoteImportance extends StatefulWidget {
+class NoteImportanceWidget extends StatefulWidget {
   final TextEditingController importanceController;
 
-  const NoteImportance({
+  const NoteImportanceWidget({
     Key? key,
     required this.importanceController,
   }) : super(key: key);
 
   @override
-  State<NoteImportance> createState() => _NoteImportanceState();
+  State<NoteImportanceWidget> createState() => _NoteImportanceWidgetState();
 }
 
-class _NoteImportanceState extends State<NoteImportance> {
+class _NoteImportanceWidgetState extends State<NoteImportanceWidget> {
   final List<String> importanceValues = ['Standard', 'Important'];
-  
 
   @override
   void initState() {
