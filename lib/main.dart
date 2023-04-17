@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notes_app/features/notes/blocs/bloc/notes_bloc.dart';
-import 'package:notes_app/features/user/blocs/bloc/user_bloc.dart';
+import 'package:notes_app/features/splash_screen/blocs/splash_screen/splash_screen_bloc.dart';
 
 import 'app_constants.dart';
 import 'routes.dart' as route;
@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (BuildContext context) => UserBloc(),
+              create: (BuildContext context) => NotesBloc()..add(InitDatabaseEvent()),
             ),
             BlocProvider(
-              create: (BuildContext context) => NotesBloc()..add(InitDatabaseEvent()),
+              create: (BuildContext context) => SplashScreenBloc(),
             ),
           ],
           child: MaterialApp(

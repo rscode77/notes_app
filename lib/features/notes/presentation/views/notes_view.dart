@@ -6,10 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:notes_app/features/notes/presentation/widgets/information_widget.dart';
 import 'package:notes_app/features/notes/presentation/widgets/menu_item_widget.dart';
+import 'package:notes_app/features/splash_screen/blocs/splash_screen/splash_screen_bloc.dart';
 
 import '../../../../app_constants.dart';
 import '../../../../enums.dart';
-import '../../../user/blocs/bloc/user_bloc.dart';
+
 import '../../blocs/bloc/notes_bloc.dart';
 import '../../domain/data/entities/note.dart';
 
@@ -37,7 +38,7 @@ class _NotesViewState extends State<NotesView> {
         child: Column(
           children: [
             Gap(30.h),
-            BlocBuilder<UserBloc, UserState>(
+            BlocBuilder<SplashScreenBloc, SplashScreenState>(
               builder: (context, state) {
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 30.w),
@@ -45,7 +46,6 @@ class _NotesViewState extends State<NotesView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const UserProfileWidget(
-                        image: '',
                         name: 'Jenny Breaks',
                       ),
                       InkWell(

@@ -16,7 +16,7 @@ class NoteRepositoryImpl extends NoteRepository {
   }
 
   @override
-  Future<void> changeImportance({required Database database, required int noteId, required String importance}) {
+  Future<void> updateImportance({required Database database, required int noteId, required String importance}) {
     return database.rawUpdate('UPDATE notes SET noteStatus = "$importance" WHERE id = $noteId');
   }
 
@@ -58,5 +58,10 @@ class NoteRepositoryImpl extends NoteRepository {
       version: 1,
     );
     return database;
+  }
+
+  @override
+  Future<void> updateDescription({required Database database, required int noteId, required String description}) {
+    return database.rawUpdate('UPDATE notes SET description = "$description" WHERE id = $noteId');
   }
 }

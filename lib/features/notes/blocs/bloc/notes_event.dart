@@ -67,13 +67,26 @@ class PerformNoteEvent extends NotesEvent {
   List<Object> get props => [noteId];
 }
 
-class ChangeImportanceEvent extends NotesEvent {
+class UpdateImportanceEvent extends NotesEvent {
   final int noteId;
   final String importance;
 
-  const ChangeImportanceEvent({
+  const UpdateImportanceEvent({
     required this.noteId,
     required this.importance,
+  });
+
+  @override
+  List<Object> get props => [noteId];
+}
+
+class UpdateDescriptionEvent extends NotesEvent {
+  final int noteId;
+  final String description;
+
+  const UpdateDescriptionEvent({
+    required this.noteId,
+    required this.description,
   });
 
   @override

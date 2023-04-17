@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/features/notes/presentation/views/add_note_view.dart';
-import 'package:notes_app/features/user/presentation/views/user_view.dart';
+import 'package:notes_app/features/splash_screen/presentation/views/splash_screen.dart';
 
 import 'features/notes/presentation/views/notes_view.dart';
 
@@ -12,7 +12,7 @@ Route<dynamic> controller(RouteSettings settings) {
   WidgetBuilder builder;
   switch (settings.name) {
     case userView:
-      builder = (BuildContext context) => const UserView();
+      builder = (BuildContext context) => const SplashScreenView();
       break;
     case notesView:
       builder = (BuildContext context) => const NotesView();

@@ -12,7 +12,7 @@ class InformationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       alignment: Alignment.center,
-      elevation: 150,
+      elevation: 100,
       backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -175,7 +175,6 @@ class InformationWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          margin: EdgeInsets.only(top: 1.h),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
                             color: black,
@@ -191,6 +190,36 @@ class InformationWidget extends StatelessWidget {
                       Flexible(
                         child: Text(
                           'Tap trash to delete note.',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Gap(8.h),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  width: 230.w,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 3.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: blue,
+                          ),
+                          height: 16.h,
+                          width: 16.w,
+                          child: const Icon(
+                            Icons.save_outlined,
+                            size: 11,
+                            color: Colors.white,
+                          )),
+                      Gap(5.w),
+                      Flexible(
+                        child: Text(
+                          'Tap to update note description.',
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ),

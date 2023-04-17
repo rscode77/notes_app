@@ -16,9 +16,6 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     });
     on<GetNotesEvent>((event, emit) async {
       var notes = await NoteRepositoryImpl().getNotes(database: state.database!);
-      if (notes.isEmpty) {
-        return;
-      }
       emit(state.copyWith(notes: notes));
     });
     on<InitDatabaseEvent>((event, emit) async {
@@ -38,8 +35,12 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       await NoteRepositoryImpl().performNote(database: state.database!, noteId: event.noteId);
       add(GetNotesEvent());
     });
-    on<ChangeImportanceEvent>((event, emit) async {
-      await NoteRepositoryImpl().changeImportance(database: state.database!, noteId: event.noteId, importance: event.importance);
+    on<UpdateImportanceEvent>((event, emit) async {
+      await NoteRepositoryImpl().updateImportance(database: state.database!, noteId: event.noteId, importance: event.importance);
+      add(GetNotesEvent());
+    });
+    on<UpdateDescriptionEvent>((event, emit) async {
+      await NoteRepositoryImpl().updateDescription(database: state.database!, noteId: event.noteId, description: event.description);
       add(GetNotesEvent());
     });
   }

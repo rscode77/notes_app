@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
@@ -38,7 +39,7 @@ class _NoteTitleWidgetState extends State<NoteTitleWidget> {
                       ),
                 ),
               ),
-            ),
+            ).animate(onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5))).shake(),
             Gap(15.w),
             Text(
               'Enter title',

@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:notes_app/app_constants.dart';
 
-class UserView extends StatelessWidget {
-  const UserView({super.key});
+class SplashScreenView extends StatelessWidget {
+  const SplashScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
@@ -47,7 +48,7 @@ class _NoteImportanceWidgetState extends State<NoteImportanceWidget> {
                       ),
                 ),
               ),
-            ),
+            ).animate(onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5))).shake(),
             Gap(15.w),
             Text(
               'Set note importance',
@@ -67,6 +68,7 @@ class _NoteImportanceWidgetState extends State<NoteImportanceWidget> {
           height: 50.h,
           child: DropdownButton<String>(
             isExpanded: true,
+            borderRadius: BorderRadius.circular(15),
             value: widget.importanceController.text,
             icon: const Icon(
               Icons.arrow_drop_down_rounded,

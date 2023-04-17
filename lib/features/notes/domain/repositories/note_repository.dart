@@ -7,6 +7,7 @@ abstract class NoteRepository {
   Future<List<Note>> getNotes({required Database database});
   Future<void> performNote({required Database database, required int noteId});
   Future<void> deleteNote({required Database database, required int noteId});
-  Future<void> changeImportance({required Database database, required int noteId, required String importance});
+  Future<void> updateImportance({required Database database, required int noteId, required String importance});
+  Future<void> updateDescription({required Database database, required int noteId, required String description});
   Future<Database> initDatabase();
 }
