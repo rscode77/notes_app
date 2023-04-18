@@ -24,7 +24,6 @@ class UserProfileWidget extends StatelessWidget {
               image: image.image,
               fit: BoxFit.cover,
             ),
-            borderRadius: BorderRadius.circular(15),
           ),
         ),
         Gap(20.w),
