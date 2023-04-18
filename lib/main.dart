@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,11 @@ import 'app_constants.dart';
 import 'routes.dart' as route;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
               create: (BuildContext context) => NotesBloc()..add(InitDatabaseEvent()),
             ),
             BlocProvider(
-              create: (BuildContext context) => SplashScreenBloc(),
+              create: (BuildContext context) => SplashScreenBloc()..add(GetNoteNameEvent()),
             ),
           ],
           child: MaterialApp(

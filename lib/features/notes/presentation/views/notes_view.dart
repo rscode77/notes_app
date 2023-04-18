@@ -26,12 +26,23 @@ class NotesView extends StatefulWidget {
 }
 
 class _NotesViewState extends State<NotesView> {
+  late Image noteIcon;
+
+  @override
+  void initState() {
+    noteIcon = Image.asset("assets/images/note_icon.png");
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(noteIcon.image, context);
+  }
+
   bool resizeNoteList = true;
   @override
   Widget build(BuildContext context) {
-    // print(MediaQuery.of(context).size.height);
-    // print(MediaQuery.of(context).size.width);
-
     return Scaffold(
       backgroundColor: background,
       body: SafeArea(
@@ -48,7 +59,8 @@ class _NotesViewState extends State<NotesView> {
                       BlocBuilder<SplashScreenBloc, SplashScreenState>(
                         builder: (context, state) {
                           return UserProfileWidget(
-                            name: state.noteName ?? '',
+                            name: state.noteName,
+                            image: noteIcon,
                           );
                         },
                       ),

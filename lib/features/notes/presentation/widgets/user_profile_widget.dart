@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../app_constants.dart';
-
 class UserProfileWidget extends StatelessWidget {
   final String name;
+  final Image image;
 
   const UserProfileWidget({
     Key? key,
     required this.name,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -17,11 +17,14 @@ class UserProfileWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-          height: 50.h,
-          width: 50.w,
+          height: 40.h,
+          width: 40.w,
           decoration: BoxDecoration(
-            color: profileIconBackground,
-            borderRadius: BorderRadius.circular(18),
+            image: DecorationImage(
+              image: image.image,
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
         Gap(20.w),
