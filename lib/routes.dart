@@ -4,9 +4,10 @@ import 'package:notes_app/features/splash_screen/presentation/views/splash_scree
 
 import 'features/notes/presentation/views/notes_view.dart';
 
-const String userView = '/';
+const String splashScreenView = '/';
 const String notesView = '/notes';
 const String addNoteView = '/addNote';
+const String userView = '/userView';
 
 Route<dynamic> controller(RouteSettings settings) {
   WidgetBuilder builder;
@@ -19,6 +20,9 @@ Route<dynamic> controller(RouteSettings settings) {
       break;
     case addNoteView:
       builder = (BuildContext context) => const AddNoteView();
+      break;
+    case splashScreenView:
+      builder = (BuildContext context) => const SplashScreenView();
       break;
     default:
       throw ('Route does not exist');

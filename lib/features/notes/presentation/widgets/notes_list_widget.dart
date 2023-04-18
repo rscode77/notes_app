@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notes_app/app_constants.dart';
@@ -53,20 +52,18 @@ class NotesListWidget extends StatelessWidget {
               );
             },
           ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 20.h,
-            ),
-            child: Align(
-              alignment: Alignment.bottomRight,
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
               child: CircleButtonWidget(
-                icon: Icons.add,
-                onPressed: () => Navigator.pushNamed(context, addNoteView),
-                color: blue,
-              ),
+                  onPressed: () => {
+                        Navigator.pushNamed(context, addNoteView),
+                      },
+                  icon: Icons.add,
+                  color: blue),
             ),
-          ).animate(onPlay: (controller) => controller.repeat(reverse: true, period: const Duration(milliseconds: 4000))).shimmer(),
+          ),
         ],
       ),
     );

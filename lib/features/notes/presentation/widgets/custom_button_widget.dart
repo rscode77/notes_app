@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButtonWidget extends StatelessWidget {
@@ -28,6 +29,8 @@ class CustomButtonWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
         ),
       ),
-    );
+    )
+        .animate(onPlay: (controller) => controller.repeat(reverse: true, period: const Duration(milliseconds: 5000)))
+        .shimmer(color: Colors.white24, delay: const Duration(milliseconds: 3000));
   }
 }

@@ -1,10 +1,21 @@
 part of 'splash_screen_bloc.dart';
 
-abstract class SplashScreenState extends Equatable {
-  const SplashScreenState();
-  
-  @override
-  List<Object> get props => [];
-}
+class SplashScreenState extends Equatable {
+  final String? noteName;
 
-class SplashScreenInitial extends SplashScreenState {}
+  const SplashScreenState({
+    required this.noteName,
+  });
+
+  @override
+  List<Object?> get props => [noteName];
+
+  SplashScreenState copyWith({
+    String? noteName,
+    bool? firstRun,
+  }) {
+    return SplashScreenState(
+      noteName: noteName ?? this.noteName,
+    );
+  }
+}

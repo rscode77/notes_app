@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CircleButtonWidget extends StatelessWidget {
@@ -26,6 +27,8 @@ class CircleButtonWidget extends StatelessWidget {
         ),
         child: Icon(icon),
       ),
-    );
+    )
+        .animate(onPlay: (controller) => controller.repeat(reverse: true, period: const Duration(milliseconds: 5000)))
+        .shimmer(color: Colors.white24, delay: const Duration(milliseconds: 3000));
   }
 }

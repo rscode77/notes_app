@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:notes_app/features/notes/presentation/widgets/custom_shake_button_widget.dart';
 import 'package:notes_app/features/notes/presentation/widgets/information_widget.dart';
 import 'package:notes_app/features/notes/presentation/widgets/menu_item_widget.dart';
 import 'package:notes_app/features/splash_screen/blocs/splash_screen/splash_screen_bloc.dart';
@@ -45,19 +45,21 @@ class _NotesViewState extends State<NotesView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const UserProfileWidget(
-                        name: 'Jenny Breaks',
+                      BlocBuilder<SplashScreenBloc, SplashScreenState>(
+                        builder: (context, state) {
+                          return UserProfileWidget(
+                            name: state.noteName ?? '',
+                          );
+                        },
                       ),
-                      InkWell(
-                        highlightColor: Colors.transparent,
-                        splashColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (context) => const InformationWidget(),
-                        ),
-                        child: const Icon(Icons.info_outline_rounded, size: 25),
-                      ).animate(onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5))).shake()
+                      CustomShakeButtonWidget(
+                          onPressed: () => showDialog(
+                                context: context,
+                                builder: (context) => const InformationWidget(),
+                              ),
+                          buttonColor: Colors.transparent,
+                          iconColor: black,
+                          icon: Icons.info_outline_rounded)
                     ],
                   ),
                 );
@@ -117,27 +119,14 @@ class _NotesViewState extends State<NotesView> {
                                   onPressed: () => changeMenuTab(context, MenuTab.performed),
                                 ),
                                 const Spacer(),
-                                InkWell(
-                                  highlightColor: Colors.transparent,
-                                  splashColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  onTap: () => setState(() {
+                                CustomShakeButtonWidget(
+                                  onPressed: () => setState(() {
                                     resizeNoteList = !resizeNoteList;
                                   }),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: blue,
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    height: 35.h,
-                                    width: 35.w,
-                                    child: Icon(
-                                      resizeNoteList ? Icons.arrow_circle_up_rounded : Icons.arrow_circle_down_rounded,
-                                      color: Colors.white,
-                                      size: 25,
-                                    ),
-                                  ),
-                                ).animate(onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5))).shake(),
+                                  buttonColor: blue,
+                                  iconColor: Colors.white,
+                                  icon: resizeNoteList ? Icons.arrow_circle_up_rounded : Icons.arrow_circle_down_rounded,
+                                )
                               ],
                             ),
                           ],

@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            initialRoute: route.notesView,
+            initialRoute: route.splashScreenView,
             onGenerateRoute: route.controller,
           ),
         );
