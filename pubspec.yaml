@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.19.3 <3.0.0"
@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
+  flutter_launcher_icons: ^0.13.0
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
@@ -45,10 +46,32 @@ dependencies:
   sqflite: ^2.2.6
   flutter_animate: ^4.1.1+1
   shared_preferences: ^2.1.0
+  flutter_native_splash: ^2.2.19
+  change_app_package_name: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/ic_launcher.png"
+  adaptive_icon_foreground: "assets/images/ic_launcher_adaptive_fore.png"
+  adaptive_icon_background: "#ffffff"
+  min_sdk_android: 21
+
+flutter_native_splash:
+  color: "#ffffff"
+  color_dark: "#ffffff"
+  image: assets/images/note_image.png
+  image_dark: assets/images/note_image.png
+
+  android_12:
+    image: assets/images/note_image.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/images/note_image.png
+    icon_background_color_dark: "#ffffff"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

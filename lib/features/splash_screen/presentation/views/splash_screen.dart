@@ -26,7 +26,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
     bgImage = Image.asset("assets/images/note_bg.png");
-    logoImage = Image.asset("assets/images/note_image.png");
+    logoImage = Image.asset("assets/images/note_image_resized.png");
     super.initState();
   }
 
