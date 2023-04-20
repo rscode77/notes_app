@@ -18,3 +18,6 @@ Users can use this application to create notes on a variety of topics, from to-d
 ![alt text](https://rscode.site/files/4_app.png)
 ![alt text](https://rscode.site/files/5_app.png)
 ![alt text](https://rscode.site/files/6_app.png)
+![alt text](https://rscode.site/files/gif/2.gif)
+![alt text](https://rscode.site/files/gif/1.gif)
+
