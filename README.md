@@ -1,16 +1,11 @@
 # notes_app
 
-A new Flutter project.
+Flutter project.
 
-## Getting Started
+## Application provides users to easily create, edit, and delete notes.
 
-This project is a starting point for a Flutter application.
+#Application created for training purposes
 
-A few resources to get you started if this is your first Flutter project:
+An application to save notes is a software program designed to allow users to create, store, and manage text-based notes digitally.
+Users can use this application to create notes on a variety of topics, from to-do lists and reminders to important information and ideas.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
